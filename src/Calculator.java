@@ -1,6 +1,5 @@
 import exception.ExpressionFormatException;
 import exception.UnsupportedNumberException;
-import exception.UnsupportedOperatorException;
 
 import java.util.Arrays;
 import java.util.List;
@@ -37,7 +36,7 @@ public class Calculator {
         return this.decimalResult;
     }
 
-    private String getOperator(String expression) throws UnsupportedOperatorException, NullPointerException {
+    private String getOperator(String expression) throws ExpressionFormatException, NullPointerException {
         if (expression.contains("+") || expression.contains("-") || expression.contains("*") || expression.contains("/")) {
             char[] expressionAsCharArray = expression.toCharArray();
             for (char searchingOperator : expressionAsCharArray) {
@@ -47,7 +46,7 @@ public class Calculator {
                 }
             }
         } else {
-            throw new UnsupportedOperatorException();
+            throw new ExpressionFormatException();
         }
         return operator;
     }
@@ -76,7 +75,9 @@ public class Calculator {
 
     private String getExpression() {
         Scanner in = new Scanner(System.in);
-        this.expression = in.nextLine();
+        if (in.hasNextLine()) {
+            this.expression = in.nextLine();
+        }
         in.close();
         return this.expression;
     }
