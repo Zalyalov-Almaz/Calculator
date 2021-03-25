@@ -142,7 +142,7 @@ public class Calculator {
             return result;
         }
         if ((firstEnteredNumberIsRoman == true && secondEnteredNumberIsRoman == false) || (firstEnteredNumberIsRoman == false && secondEnteredNumberIsRoman == true)) {
-            throw new IllegalArgumentException();
+            throw new IllegalArgumentException("In one expression, entered numbers must be or roman, or arabic only.");
         }
         return result;
     }
