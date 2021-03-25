@@ -20,16 +20,16 @@ public class Calculator {
         this.secondNumber = getSecondNumber(expression);
 
         switch (operator) {
-            case "+" : this.decimalResult = getNumber(this.firstNumber) + getNumber(this.secondNumber);
+            case "+" : this.decimalResult = getDecimalNumber(this.firstNumber) + getDecimalNumber(this.secondNumber);
                 break;
-            case "-" : this.decimalResult = getNumber(this.firstNumber) - getNumber(this.secondNumber);
+            case "-" : this.decimalResult = getDecimalNumber(this.firstNumber) - getDecimalNumber(this.secondNumber);
                 break;
-            case "*" : this.decimalResult = getNumber(this.firstNumber) * getNumber(this.secondNumber);
+            case "*" : this.decimalResult = getDecimalNumber(this.firstNumber) * getDecimalNumber(this.secondNumber);
                 break;
-            case "/" : this.decimalResult = getNumber(this.firstNumber) / getNumber(this.secondNumber);
+            case "/" : this.decimalResult = getDecimalNumber(this.firstNumber) / getDecimalNumber(this.secondNumber);
                 break;
         }
-        String finalAnswer = getAnswer(this.decimalResult);
+        String finalAnswer = getFinalAnswer(this.decimalResult);
         System.out.println(finalAnswer);
         return this.decimalResult;
     }
@@ -61,13 +61,13 @@ public class Calculator {
 
     private String getFirstNumber(String expression) throws UnsupportedNumberException {
         String firstNumberAsString = getFirstNumberAsItEntered(expression);
-        this.firstNumber = String.valueOf(getNumber(firstNumberAsString));
+        this.firstNumber = String.valueOf(getDecimalNumber(firstNumberAsString));
         return firstNumber;
     }
 
     private String getSecondNumber(String expression) throws UnsupportedNumberException {
         String secondNumberAsString = getSecondNumberAsItEntered(expression);
-        this.secondNumber = String.valueOf(getNumber(secondNumberAsString));
+        this.secondNumber = String.valueOf(getDecimalNumber(secondNumberAsString));
         return secondNumber;
     }
 
@@ -81,7 +81,7 @@ public class Calculator {
         return this.expression;
     }
 
-    private int getNumber(String numberAsString) {
+    private int getDecimalNumber(String numberAsString) {
         int number = 0;
         try {
             number = Integer.parseInt(numberAsString);
@@ -119,7 +119,7 @@ public class Calculator {
         return romanResult;
     }
 
-    public String getAnswer(int calculatedResult) {
+    private String getFinalAnswer(int calculatedResult) {
         RomanNumbers [] romanNumbers = RomanNumbers.values();
         String result = String.valueOf(calculatedResult);
         String firstNumberAsItEntered = getFirstNumberAsItEntered(this.expression);
