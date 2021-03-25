@@ -29,6 +29,7 @@ public class Calculator {
             case "*" : this.decimalResult = getNumber(this.firstNumber) * getNumber(this.secondNumber);
                 break;
             case "/" : this.decimalResult = getNumber(this.firstNumber) / getNumber(this.secondNumber);
+                break;
         }
         String finalAnswer = getAnswer(this.decimalResult);
         System.out.println(finalAnswer);
