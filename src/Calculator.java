@@ -1,8 +1,6 @@
 import exception.ExpressionFormatException;
 import exception.UnsupportedNumberException;
 
-import java.util.Arrays;
-import java.util.List;
 import java.util.Scanner;
 
 public class Calculator {
