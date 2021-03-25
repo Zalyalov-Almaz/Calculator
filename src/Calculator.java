@@ -127,7 +127,6 @@ public class Calculator {
         if (firstNumberIsRoman == true && secondNumberIsRoman == true) {
             result = decimalToRoman(calculatedResult);
         }
-        if (!firstNumberIsRoman == true && )
         return result;
     }
 }
