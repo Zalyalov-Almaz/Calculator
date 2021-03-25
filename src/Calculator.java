@@ -50,15 +50,25 @@ public class Calculator {
         return operator;
     }
 
+    private String getFirstNumberAsItEntered(String expression) {
+        String firstNumberAsItEntered = expression.substring(0, indexOfOperator);
+        return firstNumberAsItEntered;
+    }
+
+    private String getSecondNumberAsItEntered(String expression) {
+        String secondNumberAsItEntered = expression.substring(indexOfOperator + 1);
+        return secondNumberAsItEntered;
+    }
+
     private String getFirstNumber(String expression) throws UnsupportedNumberException {
-        String firstNumberAsString = expression.substring(0, indexOfOperator);
-        firstNumber = String.valueOf(getNumber(firstNumberAsString));
+        String firstNumberAsString = getFirstNumberAsItEntered(expression);
+        this.firstNumber = String.valueOf(getNumber(firstNumberAsString));
         return firstNumber;
     }
 
     private String getSecondNumber(String expression) throws UnsupportedNumberException {
-        String secondNumberAsString = expression.substring(indexOfOperator + 1);
-        secondNumber = String.valueOf(getNumber(secondNumberAsString));
+        String secondNumberAsString = getSecondNumberAsItEntered(expression);
+        this.secondNumber = String.valueOf(getNumber(secondNumberAsString));
         return secondNumber;
     }
 
@@ -92,7 +102,7 @@ public class Calculator {
         return number;
     }
 
-    public String decimalToRoman(int number) {
+    private String decimalToRoman(int number) {
         String romanResult = "";
         RomanNumbers [] romanNumbers = RomanNumbers.values();
         for (RomanNumbers romanNumber : romanNumbers) {
@@ -110,22 +120,28 @@ public class Calculator {
     public String getAnswer(int calculatedResult) {
         RomanNumbers [] romanNumbers = RomanNumbers.values();
         String result = String.valueOf(calculatedResult);
-        boolean firstNumberIsRoman = false;
-        boolean secondNumberIsRoman = false;
+        String firstNumberAsItEntered = getFirstNumberAsItEntered(this.expression);
+        String secondNumberAsItEntered = getSecondNumberAsItEntered(this.expression);
+        boolean firstEnteredNumberIsRoman = false;
+        boolean secondEnteredNumberIsRoman = false;
         for (RomanNumbers rn : romanNumbers) {
-            if (this.firstNumber.equals(rn.toString())) {
-                firstNumberIsRoman = true;
+            if (firstNumberAsItEntered.equals(rn.toString())) {
+                firstEnteredNumberIsRoman = true;
                 break;
             }
         }
         for (RomanNumbers rn : romanNumbers) {
-            if (this.secondNumber.equals(rn.toString())) {
-                secondNumberIsRoman = true;
+            if (secondNumberAsItEntered.equals(rn.toString())) {
+                secondEnteredNumberIsRoman = true;
                 break;
             }
         }
-        if (firstNumberIsRoman == true && secondNumberIsRoman == true) {
+        if (firstEnteredNumberIsRoman == true && secondEnteredNumberIsRoman == true) {
             result = decimalToRoman(calculatedResult);
+            return result;
+        }
+        if ((firstEnteredNumberIsRoman == true && secondEnteredNumberIsRoman == false) || (firstEnteredNumberIsRoman == false && secondEnteredNumberIsRoman == true)) {
+            throw new IllegalArgumentException();
         }
         return result;
     }
