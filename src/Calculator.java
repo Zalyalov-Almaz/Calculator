@@ -75,8 +75,9 @@ public class Calculator {
 
     private String getExpression() {
         Scanner in = new Scanner(System.in);
-        if (in.hasNextLine()) {
+        while (in.hasNextLine()) {
             this.expression = in.nextLine();
+            return this.expression;
         }
         in.close();
         return this.expression;
