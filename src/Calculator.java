@@ -52,12 +52,12 @@ public class Calculator {
     }
 
     private String getFirstNumberAsItEntered(String expression) {
-        String firstNumberAsItEntered = expression.substring(0, indexOfOperator);
+        String firstNumberAsItEntered = expression.substring(0, indexOfOperator).toUpperCase();
         return firstNumberAsItEntered;
     }
 
     private String getSecondNumberAsItEntered(String expression) {
-        String secondNumberAsItEntered = expression.substring(indexOfOperator + 1);
+        String secondNumberAsItEntered = expression.substring(indexOfOperator + 1).toUpperCase();
         return secondNumberAsItEntered;
     }
 
