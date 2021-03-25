@@ -1,3 +1,4 @@
+import exception.ExpressionFormatException;
 import exception.UnsupportedNumberException;
 import exception.UnsupportedOperatorException;
 
@@ -142,7 +143,7 @@ public class Calculator {
             return result;
         }
         if ((firstEnteredNumberIsRoman == true && secondEnteredNumberIsRoman == false) || (firstEnteredNumberIsRoman == false && secondEnteredNumberIsRoman == true)) {
-            throw new IllegalArgumentException("In one expression, entered numbers must be or roman, or arabic only.");
+            throw new ExpressionFormatException("In one expression, entered numbers must be or roman, or arabic only.");
         }
         return result;
     }
