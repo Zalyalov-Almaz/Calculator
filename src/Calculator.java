@@ -30,6 +30,43 @@ public class Calculator {
         return this.decimalResult;
     }
 
+    private String getFinalAnswer(int calculatedResult) {
+        RomanNumbers [] romanNumbers = RomanNumbers.values();
+        String result = String.valueOf(calculatedResult);
+        String firstNumberAsItEntered = getFirstNumberAsItEntered(this.expression);
+        String secondNumberAsItEntered = getSecondNumberAsItEntered(this.expression);
+        boolean firstEnteredNumberIsRoman = false;
+        boolean secondEnteredNumberIsRoman = false;
+        for (RomanNumbers rn : romanNumbers) {
+            if (firstNumberAsItEntered.equals(rn.toString())) {
+                firstEnteredNumberIsRoman = true;
+                break;
+            }
+        }
+        for (RomanNumbers rn : romanNumbers) {
+            if (secondNumberAsItEntered.equals(rn.toString())) {
+                secondEnteredNumberIsRoman = true;
+                break;
+            }
+        }
+        if (firstEnteredNumberIsRoman && secondEnteredNumberIsRoman) {
+            result = decimalToRoman(calculatedResult);
+            return result;
+        }
+        if (firstEnteredNumberIsRoman || secondEnteredNumberIsRoman) {
+            throw new ExpressionFormatException("In one expression, entered numbers must be or roman, or arabic only.");
+        }
+        return result;
+    }
+
+
+    private String getExpression() {
+        Scanner in = new Scanner(System.in);
+        this.expression = in.nextLine();
+        in.close();
+        return this.expression;
+    }
+
     private String getOperator(String expression) throws ExpressionFormatException, NullPointerException {
         if (expression.contains("+") || expression.contains("-") || expression.contains("*") || expression.contains("/")) {
             char[] expressionAsCharArray = expression.toCharArray();
@@ -65,12 +102,6 @@ public class Calculator {
         return secondNumber;
     }
 
-    private String getExpression() {
-        Scanner in = new Scanner(System.in);
-        this.expression = in.nextLine();
-        in.close();
-        return this.expression;
-    }
 
     private int getDecimalNumber(String numberAsString) {
         int number = 0;
@@ -110,32 +141,5 @@ public class Calculator {
         return romanResult;
     }
 
-    private String getFinalAnswer(int calculatedResult) {
-        RomanNumbers [] romanNumbers = RomanNumbers.values();
-        String result = String.valueOf(calculatedResult);
-        String firstNumberAsItEntered = getFirstNumberAsItEntered(this.expression);
-        String secondNumberAsItEntered = getSecondNumberAsItEntered(this.expression);
-        boolean firstEnteredNumberIsRoman = false;
-        boolean secondEnteredNumberIsRoman = false;
-        for (RomanNumbers rn : romanNumbers) {
-            if (firstNumberAsItEntered.equals(rn.toString())) {
-                firstEnteredNumberIsRoman = true;
-                break;
-            }
-        }
-        for (RomanNumbers rn : romanNumbers) {
-            if (secondNumberAsItEntered.equals(rn.toString())) {
-                secondEnteredNumberIsRoman = true;
-                break;
-            }
-        }
-        if (firstEnteredNumberIsRoman && secondEnteredNumberIsRoman) {
-            result = decimalToRoman(calculatedResult);
-            return result;
-        }
-        if (firstEnteredNumberIsRoman || secondEnteredNumberIsRoman) {
-            throw new ExpressionFormatException("In one expression, entered numbers must be or roman, or arabic only.");
-        }
-        return result;
-    }
+
 }
