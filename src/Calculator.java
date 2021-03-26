@@ -20,14 +20,10 @@ public class Calculator {
         this.secondNumber = getSecondNumber(expression);
 
         switch (operator) {
-            case "+" : this.decimalResult = getDecimalNumber(this.firstNumber) + getDecimalNumber(this.secondNumber);
-                break;
-            case "-" : this.decimalResult = getDecimalNumber(this.firstNumber) - getDecimalNumber(this.secondNumber);
-                break;
-            case "*" : this.decimalResult = getDecimalNumber(this.firstNumber) * getDecimalNumber(this.secondNumber);
-                break;
-            case "/" : this.decimalResult = getDecimalNumber(this.firstNumber) / getDecimalNumber(this.secondNumber);
-                break;
+            case "+" -> this.decimalResult = getDecimalNumber(this.firstNumber) + getDecimalNumber(this.secondNumber);
+            case "-" -> this.decimalResult = getDecimalNumber(this.firstNumber) - getDecimalNumber(this.secondNumber);
+            case "*" -> this.decimalResult = getDecimalNumber(this.firstNumber) * getDecimalNumber(this.secondNumber);
+            case "/" -> this.decimalResult = getDecimalNumber(this.firstNumber) / getDecimalNumber(this.secondNumber);
         }
         String finalAnswer = getFinalAnswer(this.decimalResult);
         System.out.println(finalAnswer);
@@ -50,13 +46,11 @@ public class Calculator {
     }
 
     private String getFirstNumberAsItEntered(String expression) {
-        String firstNumberAsItEntered = expression.substring(0, indexOfOperator).toUpperCase();
-        return firstNumberAsItEntered;
+        return expression.substring(0, indexOfOperator).toUpperCase();
     }
 
     private String getSecondNumberAsItEntered(String expression) {
-        String secondNumberAsItEntered = expression.substring(indexOfOperator + 1).toUpperCase();
-        return secondNumberAsItEntered;
+        return expression.substring(indexOfOperator + 1).toUpperCase();
     }
 
     private String getFirstNumber(String expression) throws UnsupportedNumberException {
@@ -73,10 +67,7 @@ public class Calculator {
 
     private String getExpression() {
         Scanner in = new Scanner(System.in);
-        while (in.hasNextLine()) {
-            this.expression = in.nextLine();
-            return this.expression;
-        }
+        this.expression = in.nextLine();
         in.close();
         return this.expression;
     }
@@ -138,11 +129,11 @@ public class Calculator {
                 break;
             }
         }
-        if (firstEnteredNumberIsRoman == true && secondEnteredNumberIsRoman == true) {
+        if (firstEnteredNumberIsRoman && secondEnteredNumberIsRoman) {
             result = decimalToRoman(calculatedResult);
             return result;
         }
-        if ((firstEnteredNumberIsRoman == true && secondEnteredNumberIsRoman == false) || (firstEnteredNumberIsRoman == false && secondEnteredNumberIsRoman == true)) {
+        if (firstEnteredNumberIsRoman || secondEnteredNumberIsRoman) {
             throw new ExpressionFormatException("In one expression, entered numbers must be or roman, or arabic only.");
         }
         return result;
